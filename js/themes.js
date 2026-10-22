@@ -2,11 +2,11 @@
    Fusion · themes — background / track switching
    ========================================================= */
 const THEME_LIST = [
-  'assets/video/bg/noir.mp4', // noir
-  'assets/video/bg/222.mp4',                                 // alt
-  'assets/video/bg/capitano.mp4',
-  'assets/video/bg/qingxioa.mp4',                            // aegir
-  'assets/video/bg/alucard.mp4'
+  'assets/images/bg/ssstik.io_@soul.blr_1779080280199.mp4', // noir
+  'assets/images/bg/222.mp4',                                 // alt
+  'assets/images/bg/capitano.mp4',
+  'assets/images/bg/qingxioa.mp4',                            // aegir
+  'assets/images/bg/alucard.mp4'
 ];
 const THEME_CLIPS = {
   Numpad1: THEME_LIST[0], Digit1: THEME_LIST[0],
@@ -18,31 +18,33 @@ const THEME_CLIPS = {
 const THEME_CLASSES = ['theme-noir', 'theme-alt', 'theme-capitano', 'theme-aegir', 'theme-alucard', 'theme-secret'];
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let bgSwitching = false;
-window.__bgClip = 'assets/video/bg/222.mp4';
+window.__bgClip = 'assets/images/bg/222.mp4';
 window.__audioStartAt = 0;
 
 function getTrackForClip(clip) {
-  if (clip === 'assets/bg/222.mp4') return 'assets/images/audio/bye-into-you-remix.mp3';
-  if (clip === 'assets/bg/qingxioa.mp4') return 'assets/images/audio/funk-mandala-slowed.mp3';
-  if (clip === 'assets/bg/alucard.mp4') return 'assets/images/audio/The Neighbourhood - Sweater Weather.mp3';
-  if (clip === 'assets/bg/capitano.mp4') return 'assets/images/audio/Halsey-Gasoline(instrumental).mp3';
+  if (clip === 'assets/images/bg/222.mp4') return 'assets/images/audio/bye-into-you-remix.mp3';
+  if (clip === 'assets/images/bg/qingxioa.mp4') return 'assets/images/audio/funk-mandala-slowed.mp3';
+  if (clip === 'assets/images/bg/alucard.mp4') return 'assets/images/audio/The Neighbourhood - Sweater Weather.mp3';
+  if (clip === 'assets/images/bg/capitano.mp4') return 'assets/images/audio/Halsey-Gasoline(instrumental).mp3';
+  if (clip === 'assets/images/bg/ssstik.io_@soul.blr_1779080280199.mp4') return 'assets/images/audio/Insomnia slowed reverb.mp3';
   return 'assets/images/audio/Insomnia slowed reverb.mp3';
 }
 
 function getAudioStartForClip(clip) {
-  if (clip === 'assets/bg/222.mp4') return 33;
-  if (clip === 'assets/bg/alucard.mp4') return 19;
-  if (clip === 'assets/bg/qingxioa.mp4') return 4.1;
+  if (clip === 'assets/images/bg/222.mp4') return 33;
+  if (clip === 'assets/images/bg/alucard.mp4') return 19;
+  if (clip === 'assets/images/bg/qingxioa.mp4') return 4.1;
+  if (clip === 'assets/images/bg/ssstik.io_@soul.blr_1779080280199.mp4') return 0;
   return 0;
 }
 
 function getThemeLabel(clip) {
   if (clip === 'secret') return 'theme · secret · impulsive';
-  if (clip === 'assets/bg/222.mp4') return 'theme · 222';
-  if (clip === 'assets/bg/capitano.mp4') return 'theme · capitano';
-  if (clip === 'assets/bg/qingxioa.mp4') return 'theme · aegir';
-  if (clip === 'assets/bg/alucard.mp4') return 'theme · alucard';
-  return 'theme · noir';
+  if (clip === 'assets/images/bg/222.mp4') return 'theme · 222';
+  if (clip === 'assets/images/bg/capitano.mp4') return 'theme · capitano';
+  if (clip === 'assets/images/bg/qingxioa.mp4') return 'theme · aegir';
+  if (clip === 'assets/images/bg/alucard.mp4') return 'theme · alucard';
+  if (clip === 'assets/images/bg/ssstik.io_@soul.blr_1779080280199.mp4') return 'theme · noir';
 }
 
 /** ใช้ตอนเข้าเว็บ · ตั้งพื้นหลังทันทีโดยไม่ fade */
@@ -112,11 +114,11 @@ function applyThemeClasses(clip) {
     if (root) root.innerHTML = '';
   }
   document.body.classList.remove(...THEME_CLASSES);
-  if (clip === 'assets/bg/noir.mp4') document.body.classList.add('theme-noir');
-  else if (clip === 'assets/bg/222.mp4') document.body.classList.add('theme-alt');
-  else if (clip === 'assets/bg/capitano.mp4') document.body.classList.add('theme-capitano');
-  else if (clip === 'assets/bg/qingxioa.mp4') document.body.classList.add('theme-aegir');
-  else if (clip === 'assets/bg/alucard.mp4') document.body.classList.add('theme-alucard');
+  if (clip === 'assets/images/bg/ssstik.io_@soul.blr_1779080280199.mp4') document.body.classList.add('theme-noir');
+  else if (clip === 'assets/images/bg/222.mp4') document.body.classList.add('theme-alt');
+  else if (clip === 'assets/images/bg/capitano.mp4') document.body.classList.add('theme-capitano');
+  else if (clip === 'assets/images/bg/qingxioa.mp4') document.body.classList.add('theme-aegir');
+  else if (clip === 'assets/images/bg/alucard.mp4') document.body.classList.add('theme-alucard');
   // retrigger bio card entrance animation
   const bioCard = document.querySelector('.section-about .card');
   if (bioCard) {
@@ -130,19 +132,19 @@ function applyThemeClasses(clip) {
 function applyMeta(clip) {
   const title = document.getElementById('playerTitle');
   const sub = document.getElementById('playerSub');
-  if (clip === 'assets/bg/222.mp4') {
+  if (clip === 'assets/images/bg/222.mp4') {
     if (title) title.textContent = 'bye × Into You';
     if (sub) sub.textContent = 'Ariana Grande · Altare Remix';
-  } else if (clip === 'assets/bg/capitano.mp4') {
+  } else if (clip === 'assets/images/bg/capitano.mp4') {
     if (title) title.textContent = 'Gasoline';
     if (sub) sub.textContent = 'Halsey · instrumental';
-  } else if (clip === 'assets/bg/qingxioa.mp4') {
+  } else if (clip === 'assets/images/bg/qingxioa.mp4') {
     if (title) title.textContent = 'funk-mandala-slowed';
     if (sub) sub.textContent = 'Dj Samir';
-  } else if (clip === 'assets/bg/alucard.mp4') {
+  } else if (clip === 'assets/images/bg/alucard.mp4') {
     if (title) title.textContent = 'Sweater Weather';
     if (sub) sub.textContent = 'The Neighbourhood';
-  } else {
+  } else if (clip === 'assets/images/bg/ssstik.io_@soul.blr_1779080280199.mp4') {
     if (title) title.textContent = 'Insomnia';
     if (sub) sub.textContent = 'slowed + reverb';
   }
@@ -171,10 +173,10 @@ async function switchBackground(clip) {
   const outgoing = getActiveBg();
   const audio = music; // fusion uses #bgMusic
   const wasPlaying = audio && !audio.paused;
-  const isAlt = clip === 'assets/bg/222.mp4';
-  const isCapitano = clip === 'assets/bg/capitano.mp4';
-  const isAegir = clip === 'assets/bg/qingxioa.mp4';
-  const isAlucard = clip === 'assets/bg/alucard.mp4';
+  const isAlt = clip === 'assets/images/bg/222.mp4';
+  const isCapitano = clip === 'assets/images/bg/capitano.mp4';
+  const isAegir = clip === 'assets/images/bg/qingxioa.mp4';
+  const isAlucard = clip === 'assets/images/bg/alucard.mp4';
   const targetVol = typeof audio.dataset.userVol !== 'undefined'
     ? parseFloat(audio.dataset.userVol)
     : (audio.volume || 0.42);
