@@ -1,0 +1,102 @@
+/* =========================================================
+   Fusion · theme-adapt — body theme class hooks
+   ========================================================= */
+
+/* ===== Theme adaptation for fusion class names ===== */
+body.is-theme-fading .overlay,
+body.is-theme-fading .video-bg .bg-layer {
+  transition: opacity 0.7s ease, filter 0.7s ease, background 0.7s ease;
+}
+
+/* Map profile's .video-overlay rules onto fusion's .overlay */
+body.theme-alt .overlay,
+body.theme-noir .overlay,
+body.theme-capitano .overlay,
+body.theme-alucard .overlay,
+body.theme-aegir .overlay {
+  transition: background 0.8s ease;
+}
+
+body.theme-alt .video-bg .bg-layer { filter: brightness(0.42) contrast(1.15) saturate(1.05); }
+body.theme-noir .video-bg .bg-layer { filter: brightness(0.4) contrast(1.2) saturate(0.95); }
+body.theme-capitano .video-bg .bg-layer { filter: brightness(0.42) contrast(1.18) saturate(0.8) hue-rotate(-6deg); }
+body.theme-alucard .video-bg .bg-layer { filter: brightness(0.48) contrast(1.22) saturate(1.05); }
+body.theme-aegir .video-bg .bg-layer { filter: brightness(0.4) contrast(1.12) saturate(1.2) hue-rotate(10deg); }
+
+body.theme-alt .overlay {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(140, 160, 200, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse at center, rgba(4, 6, 14, 0.3) 0%, rgba(2, 3, 10, 0.9) 100%);
+}
+body.theme-noir .overlay {
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 70%, rgba(120, 15, 25, 0.28) 0%, transparent 55%),
+    radial-gradient(ellipse at center, rgba(5, 2, 3, 0.25) 0%, rgba(3, 1, 2, 0.92) 100%);
+}
+body.theme-capitano .overlay {
+  background:
+    radial-gradient(ellipse 80% 55% at 60% 30%, rgba(60, 120, 180, 0.2) 0%, transparent 55%),
+    radial-gradient(ellipse at center, rgba(3, 6, 11, 0.28) 0%, rgba(2, 4, 8, 0.93) 100%);
+}
+body.theme-alucard .overlay {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 70%, rgba(120, 10, 20, 0.32) 0%, transparent 55%),
+    radial-gradient(ellipse at center, rgba(2, 0, 1, 0.3) 0%, rgba(1, 0, 0, 0.94) 100%);
+}
+body.theme-aegir .overlay {
+  background:
+    radial-gradient(ellipse 80% 50% at 40% 20%, rgba(20, 140, 160, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at center, rgba(2, 8, 12, 0.28) 0%, rgba(1, 4, 8, 0.93) 100%);
+}
+
+/* accent shifts for UI */
+body.theme-alt .nav-badge,
+body.theme-alt .intro-dot,
+body.theme-alt .player-fill { background: linear-gradient(90deg, #8ab0e0, #e0f0ff); }
+body.theme-noir .nav-badge,
+body.theme-noir .intro-dot,
+body.theme-noir .player-fill { background: linear-gradient(90deg, #c04050, #f0c0c8); }
+body.theme-capitano .nav-badge,
+body.theme-capitano .intro-dot,
+body.theme-capitano .player-fill { background: linear-gradient(90deg, #3a88c8, #b8dcff); }
+body.theme-alucard .nav-badge,
+body.theme-alucard .intro-dot,
+body.theme-alucard .player-fill { background: linear-gradient(90deg, #b02030, #f0a0a8); }
+body.theme-aegir .nav-badge,
+body.theme-aegir .intro-dot,
+body.theme-aegir .player-fill { background: linear-gradient(90deg, #20a8b8, #a0f0e8); }
+
+body.theme-secret .overlay {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(30, 80, 40, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at center, rgba(2, 6, 2, 0.35) 0%, rgba(0, 2, 0, 0.94) 100%);
+}
+body.theme-secret .noise { opacity: 0.1; }
+body.theme-secret .nav-badge { background: linear-gradient(90deg, #2a8a40, #80f0a0); }
+
+/* Toast */
+.theme-toast {
+  position: fixed;
+  bottom: 88px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(8, 6, 16, 0.88);
+  border: 1px solid rgba(180, 160, 255, 0.25);
+  color: #e8e0ff;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 8px 16px;
+  border-radius: 999px;
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  backdrop-filter: blur(12px);
+}
+.theme-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+

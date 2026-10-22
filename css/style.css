@@ -1,0 +1,17 @@
+/* =========================================================
+   Fusion · style.css — barrel (imports modules in order)
+   Prefer linking modules in index.html for parallel load.
+   ========================================================= */
+
+@import url('base.css');
+@import url('background.css');
+@import url('intro.css');
+@import url('loader.css');
+@import url('layout.css');
+@import url('sections.css');
+@import url('gallery.css');
+@import url('player.css');
+@import url('responsive.css');
+@import url('theme-adapt.css');
+@import url('animations.css');
+@import url('effects.css');

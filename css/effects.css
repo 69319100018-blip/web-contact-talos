@@ -1,0 +1,224 @@
+/* =========================================================
+   Fusion · effects — spotlight, card sheen, progressive reveal, select-lock
+   ========================================================= */
+
+/* ===== Cursor spotlight ===== */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-out);
+  background: radial-gradient(
+    650px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(200, 185, 255, 0.18) 0%,
+    rgba(167, 139, 250, 0.1) 28%,
+    transparent 58%
+  );
+  mix-blend-mode: soft-light;
+}
+.spotlight.is-on {
+  opacity: 1;
+}
+.spotlight.is-hot {
+  background: radial-gradient(
+    520px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(200, 180, 255, 0.22) 0%,
+    rgba(167, 139, 250, 0.12) 22%,
+    transparent 52%
+  );
+}
+
+/* specular core · แสงสะท้อนจุดกลาง */
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    140px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(230, 220, 255, 0.1) 35%,
+    transparent 70%
+  );
+  opacity: 0.85;
+  mix-blend-mode: overlay;
+}
+
+/* soft vignette so edges stay dark */
+.spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 70% at 50% 45%,
+    transparent 40%,
+    rgba(3, 0, 20, 0.25) 100%
+  );
+  pointer-events: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .spotlight { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spotlight { display: none; }
+}
+
+
+/* ===== Card light reflection (specular sheen) ===== */
+.card,
+.project-card,
+.char-preview,
+.album-item,
+.player,
+.chars-open-btn {
+  --rx: 50%;
+  --ry: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+.card::before,
+.project-card::before,
+.char-preview::before,
+.album-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  background: radial-gradient(
+    420px circle at var(--rx) var(--ry),
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(200, 185, 255, 0.1) 28%,
+    transparent 58%
+  );
+  mix-blend-mode: soft-light;
+}
+
+.card:hover::before,
+.project-card:hover::before,
+.char-preview:hover::before,
+.album-item:hover::before {
+  opacity: 1;
+}
+
+/* edge gleam · ขอบเงาแสง */
+.card::after,
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  background: linear-gradient(
+    125deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.08) calc(var(--rx) - 8%),
+    rgba(255, 255, 255, 0.2) var(--rx),
+    rgba(255, 255, 255, 0.08) calc(var(--rx) + 8%),
+    transparent 70%
+  );
+  mix-blend-mode: overlay;
+}
+
+.card:hover::after,
+.project-card:hover::after {
+  opacity: 1;
+}
+
+/* glass rim highlight on cards */
+.card,
+.project-card {
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+/* player subtle sheen */
+.player {
+  overflow: hidden;
+}
+.player::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: playerSheen 7s var(--ease-inout) infinite;
+  opacity: 0.7;
+}
+@keyframes playerSheen {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .card::before, .project-card::before, .char-preview::before, .album-item::before,
+  .card::after, .project-card::after, .player::before {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .player::before { animation: none; }
+  .card::before, .project-card::before, .char-preview::before, .album-item::before,
+  .card::after, .project-card::after {
+    transition: none;
+  }
+}
+
+/* ===== Progressive reveal (smooth staged boot) ===== */
+.reveal-pending {
+  opacity: 0 !important;
+  transform: translateY(18px) scale(0.985) !important;
+  filter: blur(4px);
+  pointer-events: none;
+  transition: none !important;
+}
+.reveal-in {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  pointer-events: auto;
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-pending,
+  .reveal-in {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* Anti-inspect assist · still allow form fields */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
+}
